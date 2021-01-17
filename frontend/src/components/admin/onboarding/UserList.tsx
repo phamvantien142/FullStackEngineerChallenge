@@ -19,9 +19,19 @@ const UserList = () => {
             }
         })()
     }, [history])
+    const edit = (id: string) => {
+        // TODO: go to review edit form
+    }
+    const remove = (id: string) => {
+        // TODO: send the delete API to remove this review
+    }
     return <>
         <div className="pb-2">User management</div>
-        <div className="pb-2"><Button>Create User</Button></div>
+        <div className="pb-2">
+            <Button onClick={() => history.push(`${UrlPrefixes[UserType.admin]}/new-user`)}>
+                Create User
+            </Button>
+        </div>
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -41,8 +51,8 @@ const UserList = () => {
                             <td>{email}</td>
                             <td>
                                 <div className="d-flex">
-                                    <Button variant="primary">Edit</Button>
-                                    <Button variant="danger" className="ml-1">Remove</Button>
+                                    <Button variant="primary" onClick={() => edit(_id)}>Edit</Button>
+                                    <Button variant="danger" onClick={() => remove(_id)} className="ml-1">Remove</Button>
                                 </div>
                             </td>
                         </tr>)

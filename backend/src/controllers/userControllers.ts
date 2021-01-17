@@ -17,7 +17,7 @@ export const postLogin = combineMiddlewares(
     handleMiddleware(async (req: Request, res: Response) => {
         const {email, password} = req.body
         const user = await User.findOne({
-            userType: UserType.admin,
+            userType: UserType.user,
             email
         }).exec()
         if (!user) return res.status(500).json({error: 'User not found'})

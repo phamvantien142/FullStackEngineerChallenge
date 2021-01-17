@@ -65,9 +65,12 @@ export const postRegister = combineMiddlewares(
  */
 export const postNewUser = combineMiddlewares(
     authenticateToken(UserType.admin),
-    ...userFieldsValidation,
+    ...registerFieldsValidation,
     handleMiddleware(async (req: Request, res: Response) => {
-        const {email, password, firstName, lastName} = req.body
+        const {email, password, confirmPassword, firstName, lastName} = req.body
+        if (
+            password !== confirmPassword
+        ) return res.status(500).json({error: 'Re-password is not match'})
         const user = await User.findOne({
             userType: UserType.user,
             email

@@ -11,7 +11,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-app.use('', userRoutes)
+app.use(userRoutes)
 app.use('/admin', adminRoutes)
 
 const port = process.env.PORT || 3001

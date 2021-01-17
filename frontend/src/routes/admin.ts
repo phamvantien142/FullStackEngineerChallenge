@@ -20,10 +20,24 @@ const routes: ReadonlyArray<IRoute> = [
     {
         path: '/register',
         component: loadable({
-            loader: () => import('../components/admin/Register'),
+            loader: () => import('../components/admin/AdminRegister'),
             loading: Loading
         })
     },
+    {
+        path: '/new-user',
+        component: loadable({
+            loader: () => import('../components/admin/NewUser'),
+            loading: Loading
+        })
+    },
+    {
+        path: '/new-review',
+        component: loadable({
+            loader: () => import('../components/admin/NewReview'),
+            loading: Loading
+        })
+    }
 ]
 
 export default routes
