@@ -250,6 +250,11 @@ export const postAssignReview = combineMiddlewares(
             userType: UserType.user,
         }).exec()
         if (!user) return res.status(500).json({error: 'User not found'})
+        const feedback = await Feedback.findOne({
+            review: review._id,
+            reviewer: user._id,
+        }).exec()
+        if (feedback) return res.status(500).json({error: 'This employee is already assigned'})
         await Feedback.create({
             review: review._id,
             reviewer: user._id,
