@@ -7,8 +7,9 @@ const routes: ReadonlyArray<IRoute> = [
         path: '/',
         component: loadable({
             loader: () => import('../components/admin/Home'),
-            loading: Loading
-        })
+            loading: Loading,
+        }),
+        exact: true
     },
     {
         path: '/login',

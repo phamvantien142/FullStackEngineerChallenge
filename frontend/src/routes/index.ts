@@ -19,8 +19,7 @@ const routes = Object.entries(routesConfiguration)
         for (const route of routes) {
             acc.push({
                 ...route,
-                path: `${UrlPrefixes[userType as UserType]}${route.path}`,
-                exact: true
+                path: `${UrlPrefixes[userType as UserType]}${route.path}`
             })
         }
         return acc

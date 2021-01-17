@@ -12,6 +12,7 @@ const isPromise = (maybePromise: any) => !!maybePromise
 	&& (typeof maybePromise === 'object' || typeof maybePromise === 'function')
     && typeof maybePromise.then === 'function'
 
+// This is a wrapper of middleware, response an server error if there is any failure inside the callback
 export const handleMiddleware = (middleware: IMiddleware) => (
     req: Request, res: Response, next: NextFunction
 ) => {

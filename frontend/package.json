@@ -12,7 +12,6 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "dotenv": "^8.2.0",
-    "html-webpack-plugin": "^4.5.1",
     "node-sass": "^4.14.1",
     "qs": "^6.9.6",
     "react": "^17.0.1",
@@ -25,8 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

@@ -168,7 +168,7 @@ export const getUsers = combineMiddlewares(
     })
 )
 /**
- * GET /admin/review
+ * POST /admin/review
  * New a review
  */
 export const postNewReview = combineMiddlewares(
