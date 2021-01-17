@@ -83,3 +83,5 @@ In this challenge, I implemented some screen pages:
   * Home overview screen for admin: (Show the list of employees and reviews - but not implemented the pagination display, only show first 20 records for each).
 
 In the whole app, jwt authentication was used for every time sending a request. The jwt token was stored into the browser localStorage and will retrieve immediately if need to send a request.
+
+Technology used for frontend side: ReactJS, bootstrap, reactboostrap, axios for sending API, ReactRouter for navigation
