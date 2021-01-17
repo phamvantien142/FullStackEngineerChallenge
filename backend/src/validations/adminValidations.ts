@@ -30,8 +30,10 @@ export const postNewReviewValidation = [
     body('title', 'title is not empty').notEmpty(),
     body('email', 'email is required').notEmpty(),
     body('email', 'email must be a valid email format').isEmail(),
+    validationResultMiddleware
 ]
 
 export const putEditReviewValidation = [
     body('title', 'title is not empty').notEmpty(),
+    validationResultMiddleware
 ]
