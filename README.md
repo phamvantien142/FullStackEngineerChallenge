@@ -1,10 +1,6 @@
 # Full Stack Developer Challenge
-This is an interview challengs. Please feel free to fork. Pull Requests will be ignored.
-
-## Requirements
+## 1. Requirements
 Design a web application that allows employees to submit feedback toward each other's performance review.
-
-*Partial solutions are acceptable.*  It is not necessary to submit a complete solution that implements every requirement.
 
 ### Admin view
 * Add/remove/update/view employees
@@ -15,24 +11,79 @@ Design a web application that allows employees to submit feedback toward each ot
 * List of performance reviews requiring feedback
 * Submit feedback
 
-## Challenge Scope
-* High level description of design and technologies used
-* Server side API (using a programming language and/or framework of your choice)
-  * Implementation of at least 3 API calls
-  * Most full stack web developers at PayPay currently use Java, Ruby on Rails, or Node.js on the server(with MySQL for the database), but feel free to use other tech if you prefer
-* Web app
-  * Implementation of 2-5 web pages using a modern web framework (e.g. React or Angular) that talks to server side
-    * This should integrate with your API, but it's fine to use static responses for some of it 
-* Document all assumptions made
-* Complete solutions aren't required, but what you do submit needs to run.
+## 2. High-level design
 
-## How to complete this challenge
-* Fork this repo in github
-* Complete the design and code as defined to the best of your abilities
-* Place notes in your code to help with clarity where appropriate. Make it readable enough to present to the PayPay interview team
-* Complete your work in your own github repo and send the results to us and/or present them during your interview
+![alt text](https://user-images.githubusercontent.com/9964409/104837329-25d7d400-58f7-11eb-83e7-5b90f4b71ee8.png)
 
-## What are we looking for? What does this prove?
-* Assumptions you make given limited requirements
-* Technology and design choices
-* Identify areas of your strengths
+## 3. Data structure
+
+* User: Combine two types (Admin and Employee model)
+```
+_id NOT NULL (Mongo ObjectID)
+userType NOT NULL (String with only two types (admin|user(employee)))
+firstName NOT NULL (String)
+lastName NOT NULL (String)
+email NOT NULL (String)
+password NOT NULL (String)
+
+Index: {_id, userType, email}
+Unique constraint: {userType, email}
+```
+* Review: Represent a performance review of a specific employee
+```
+_id NOT NULL (Mongo ObjectID)
+title NOT NULL (String with only two values (admin|user(employee)))
+reviewee NOT NULL (ObjectID - foreignKey with User table)
+totalStars NOT NULL (Number)
+totalFeedbacks NOT NULL (Number)
+createdAt NOT NULL (Date)
+
+Index: {_id, createdAt}
+```
+* Feedback: Use this table for both two operations:
+  * Admin assigns a reviewer: Create a new Feedback record and set Assigned status.
+  * User send a feedback: Update the feedback and set Completed status.
+```
+_id NOT NULL (Mongo ObjectID)
+reviewer NOT NULL (ObjectID - foreignKey with User table)
+status NOT NULL (String with only two values (Assigned|Completed))
+stars NOT NULL (Number) (Integer from 1 to 5)
+comment NOT NULL (String)
+createdAt NOT NULL (Date)
+
+Index: {_id, createdAt, reviewer}
+```
+
+## 4. Server API
+* Admin API
+  * POST ```/admin/login``` - Login an admin
+  * POST ```/admin/register``` - Register an admin account
+  * POST ```/admin/user``` - New an employee account
+  * PUT ```/admin/user/:id``` - Update employee information by id
+  * DELETE ```/admin/user/:id``` - Delete an employee by id
+  * GET ```/admin/user/:id``` - Get employee information by id
+  * GET ```/admin/users``` - Get a list of employee information with pagination: {Params: pageIndex}
+  * POST ```/admin/review``` - New a review
+  * PUT ```/admin/review/:id``` - Update review information
+  * GET ```/admin/users``` - Get a list of review information with pagination: {Params: pageIndex}
+  * POST ```/admin/review/:id/assign``` (body: {email}) - Assign a reviewer (determined by email) to join a specific review: New a feedback with Assigned status
+* Employee API
+  * POST ```/login``` - Login an employee
+  * GET ```/feedbacks``` - Get a list of feedback information with pagination by reviewer (logged in account): {Params: pageIndex}
+  * PUT ```/feedback/:id``` - Update the feedback (do nothing in case of completed feedback)
+
+Technology used for backend side: NodeJS, ExpressJS, MongoDB, Jest (for testing)
+
+## 5. Website application
+In this challenge, I implemented some screen pages:
+  * Login for Admin and Employee
+  * Register a new admin account
+  * New an employee account
+  * New a review
+  * Home overview screen for admin: (Show the list of employees and reviews - but not implemented the pagination display, only show first 20 records for each).
+
+In the whole app, jwt authentication was used for every time sending a request. The jwt token was stored into the browser localStorage and will retrieve immediately if need to send a request.
+
+Technology used for frontend side: ReactJS, bootstrap, reactboostrap, axios for sending API, ReactRouter for navigation
+
+![alt text](https://user-images.githubusercontent.com/9964409/104838570-19577980-58ff-11eb-943f-f96b354249a5.png)
