@@ -4,6 +4,9 @@
 
 In the project directory, you can run:
 
+### `yarn`
+Install all necessary packages
+
 ### `yarn start`
 
 Runs the app through nodemon environment.\
