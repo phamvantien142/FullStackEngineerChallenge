@@ -11,6 +11,10 @@ import {
     userFieldsValidation, putEditReviewValidation, registerFieldsValidation
 } from '../validations/adminValidations'
 
+/**
+ * POST /admin/login
+ * Login admin api
+ */
 export const postLogin = combineMiddlewares(
     ...postLoginValidation,
     handleMiddleware(async (req: Request, res: Response) => {
@@ -29,6 +33,10 @@ export const postLogin = combineMiddlewares(
         })
     })
 )
+/**
+ * POST /admin/register
+ * Register an admin account.
+ */
 export const postRegister = combineMiddlewares(
     ...registerFieldsValidation,
     handleMiddleware(async (req: Request, res: Response) => {
@@ -51,7 +59,10 @@ export const postRegister = combineMiddlewares(
         res.status(200).json(true)
     })
 )
-
+/**
+ * POST /admin/user
+ * New an user account
+ */
 export const postNewUser = combineMiddlewares(
     authenticateToken(UserType.admin),
     ...userFieldsValidation,
@@ -72,7 +83,10 @@ export const postNewUser = combineMiddlewares(
         res.status(200).json(true)
     })
 )
-
+/**
+ * PUT /admin/user/:id
+ * Update user information.
+ */
 export const putEditUser = combineMiddlewares(
     authenticateToken(UserType.admin),
     ...userFieldsValidation,
@@ -91,7 +105,10 @@ export const putEditUser = combineMiddlewares(
         res.status(200).json(true)
     })
 )
-
+/**
+ * DELETE /admin/user/:id
+ * Remove an user
+ */
 export const deleteUser = combineMiddlewares(
     authenticateToken(UserType.admin),
     handleMiddleware(async (req: Request, res: Response) => {
@@ -104,7 +121,10 @@ export const deleteUser = combineMiddlewares(
         res.status(200).json(true)
     })
 )
-
+/**
+ * GET /admin/user/:id
+ * Get user information.
+ */
 export const getUser = combineMiddlewares(
     authenticateToken(UserType.admin),
     handleMiddleware(async (req: Request, res: Response) => {
@@ -117,7 +137,11 @@ export const getUser = combineMiddlewares(
         res.status(200).json({email, firstName, lastName, createdAt})
     })
 )
-
+/**
+ * GET /admin/users
+ * Get a list of user information with pagination.
+ *    Params: pageIndex
+ */
 export const getUsers = combineMiddlewares(
     authenticateToken(UserType.user),
     handleMiddleware(async (req: Request, res: Response) => {
@@ -140,7 +164,10 @@ export const getUsers = combineMiddlewares(
         })
     })
 )
-
+/**
+ * GET /admin/review
+ * New a review
+ */
 export const postNewReview = combineMiddlewares(
     authenticateToken(UserType.admin),
     ...postNewReviewValidation,
@@ -160,7 +187,10 @@ export const postNewReview = combineMiddlewares(
         res.status(200).json(true)
     })
 )
-
+/**
+ * PUT /admin/review/:id
+ * Update review information
+ */
 export const putEditReview = combineMiddlewares(
     authenticateToken(UserType.admin),
     ...putEditReviewValidation,
@@ -173,7 +203,11 @@ export const putEditReview = combineMiddlewares(
         res.status(200).json(true)
     })
 )
-
+/**
+ * GET /admin/users
+ * Get a list of review information with pagination.
+ *    Params: pageIndex
+ */
 export const getReviews = combineMiddlewares(
     authenticateToken(UserType.user),
     handleMiddleware(async (req: Request, res: Response) => {
@@ -197,7 +231,10 @@ export const getReviews = combineMiddlewares(
         })
     })
 )
-
+/**
+ * POST /admin/review/:id/assign
+ * Assign a reviewer to join a specific review
+ */
 export const postAssignReview = combineMiddlewares(
     authenticateToken(UserType.admin),
     ...postNewReviewValidation,

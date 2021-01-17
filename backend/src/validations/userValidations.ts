@@ -8,7 +8,7 @@ export const postLoginValidation = [
     validationResultMiddleware
 ]
 
-export const postFeedbackValidation = [
+export const putFeedbackValidation = [
     body('stars', 'stars is not a number').isNumeric(),
     body('comment', 'invalid comment').isString(),
     validationResultMiddleware,

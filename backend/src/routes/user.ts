@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { getReviews, postLogin, postReviewFeedback } from '../controllers/userControllers'
+import { getFeedbacks, postLogin, putFeedback } from '../controllers/userControllers'
 
 const app = Router({mergeParams: true})
 
@@ -7,7 +7,7 @@ const app = Router({mergeParams: true})
 app.post('/login', postLogin)
 
 // Performance review API
-app.get('/reviews', getReviews)
-app.post('/review/:id/feedback', postReviewFeedback)
+app.get('/feedbacks', getFeedbacks)
+app.post('/feedback/:id', putFeedback)
 
 export default app

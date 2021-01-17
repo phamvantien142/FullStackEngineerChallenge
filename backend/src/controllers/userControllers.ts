@@ -6,8 +6,12 @@ import { comparePassword } from '../helpers/utils'
 import { FeedbackStatus, REVIEW_PAGE_SIZE, UserType } from '../helpers/constants'
 import Feedback from '../models/Feedback'
 import Review, { IReview } from '../models/Review'
-import { postFeedbackValidation, postLoginValidation } from '../validations/userValidations'
+import { putFeedbackValidation, postLoginValidation } from '../validations/userValidations'
 
+/**
+* POST /login
+* Login user api
+*/
 export const postLogin = combineMiddlewares(
     ...postLoginValidation,
     handleMiddleware(async (req: Request, res: Response) => {
@@ -25,8 +29,12 @@ export const postLogin = combineMiddlewares(
         })
     })
 )
-
-export const getReviews = combineMiddlewares(
+/**
+ * GET /users
+ * Get a list of feedback information with pagination.
+ *    Params: pageIndex
+ */
+export const getFeedbacks = combineMiddlewares(
     authenticateToken(UserType.user),
     handleMiddleware(async (req: Request, res: Response) => {
         const {user} = (req as IRequest)
@@ -50,10 +58,13 @@ export const getReviews = combineMiddlewares(
         })
     })
 )
-
-export const postReviewFeedback = combineMiddlewares(
+/**
+ * PUT /feedback/:id
+ * Update feedback information
+ */
+export const putFeedback = combineMiddlewares(
     authenticateToken(UserType.user),
-    ...postFeedbackValidation,
+    ...putFeedbackValidation,
     handleMiddleware(async (req: Request, res: Response) => {
         const {user} = (req as IRequest)
         const {stars, comment} = req.body

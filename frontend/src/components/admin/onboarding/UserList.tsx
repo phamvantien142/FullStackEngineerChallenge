@@ -10,7 +10,7 @@ const UserList = () => {
     useEffect(() => {
         (async () => {
             const res = await fetchGet(UserType.admin, '/users')
-            if (res.data === 'Unauthorized') {
+            if (res.data === 'Unauthorized' || res.data.error === 'Invalid token') {
                 history.push(`${UrlPrefixes[UserType.admin]}/login`)
                 return
             }
@@ -34,7 +34,7 @@ const UserList = () => {
             <tbody>
                 {
                     !users.length
-                        ? <tr><td colSpan={3} className="text-center">Empty data</td></tr>
+                        ? <tr><td colSpan={4} className="text-center">Empty data</td></tr>
                         : users.map(({_id, firstName, lastName, email}) => <tr key={_id}>
                             <td>{firstName}</td>
                             <td>{lastName}</td>
