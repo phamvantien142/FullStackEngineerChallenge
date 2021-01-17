@@ -40,7 +40,9 @@ createdAt NOT NULL (Date)
 
 Index: {_id, createdAt}
 ```
-* Feedback: Have a n-1 relationship with Review table. Represent
+* Feedback: Use this table for both two operations:
+  * Admin assigns a reviewer: Create a new Feedback record and set Assigned status.
+  * User send a feedback: Update the feedback and set Completed status.
 ```
 _id NOT NULL (Mongo ObjectID)
 reviewer NOT NULL (ObjectID - foreignKey with User table)
