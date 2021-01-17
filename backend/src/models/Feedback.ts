@@ -30,7 +30,8 @@ const rawFeedbackSchema = {
 }
 
 const userSchema = new mongoose.Schema(rawFeedbackSchema, {timestamps: true})
-
+userSchema.index([{createdAt: 1, reviewer: 1}])
+userSchema.index({review: 1, reviewer: 1}, {unique: true}) // unique constraint with review and reviewer
 export interface IFeedback {
     _id: string
     review: IReview
