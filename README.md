@@ -54,7 +54,7 @@ createdAt NOT NULL (Date)
 Index: {_id, createdAt, reviewer}
 ```
 
-## Server API
+## 4. Server API
 * Admin API
   * POST ```/admin/login``` - Login an admin
   * POST ```/admin/register``` - Register an admin account
@@ -74,7 +74,7 @@ Index: {_id, createdAt, reviewer}
 
 Technology used for backend side: NodeJS, ExpressJS, MongoDB, Jest (for testing)
 
-## Website application
+## 5. Website application
 In this challenge, I implemented some screen pages:
   * Login for Admin and Employee
   * Register a new admin account
@@ -85,3 +85,5 @@ In this challenge, I implemented some screen pages:
 In the whole app, jwt authentication was used for every time sending a request. The jwt token was stored into the browser localStorage and will retrieve immediately if need to send a request.
 
 Technology used for frontend side: ReactJS, bootstrap, reactboostrap, axios for sending API, ReactRouter for navigation
+
+![alt text](https://user-images.githubusercontent.com/9964409/104838570-19577980-58ff-11eb-943f-f96b354249a5.png)
