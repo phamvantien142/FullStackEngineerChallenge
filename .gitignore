@@ -5,6 +5,7 @@ backend/yarn.lock
 frontend/yarn.lock
 backend/yarn-error.log
 frontend/yarn-error.log
+frontend/.eslintcache
 
 # API keys and secrets
 backend/.env
