@@ -1,0 +1,24 @@
+#Build
+backend/build
+frontend/build
+backend/yarn.lock
+frontend/yarn.lock
+backend/yarn-error.log
+frontend/yarn-error.log
+
+# API keys and secrets
+backend/.env
+frontend/.env
+
+# Dependency directory
+backend/node_modules
+frontend/node_modules
+
+# Editors
+.vscode
+
+# OS
+.DS_Store
+
+# jest coverage
+coverage
