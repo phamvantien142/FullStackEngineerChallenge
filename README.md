@@ -45,13 +45,14 @@ Index: {_id, createdAt}
   * User send a feedback: Update the feedback and set Completed status.
 ```
 _id NOT NULL (Mongo ObjectID)
+review NOT NULL (ObjectID - foreignKey with Review table)
 reviewer NOT NULL (ObjectID - foreignKey with User table)
 status NOT NULL (String with only two values (Assigned|Completed))
 stars NOT NULL (Number) (Integer from 1 to 5)
 comment NOT NULL (String)
 createdAt NOT NULL (Date)
-
 Index: {_id, createdAt, reviewer}
+Unique constraint: {review, reviewer}
 ```
 
 ## 4. Server API
