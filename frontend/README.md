@@ -1,4 +1,4 @@
-# Frontend: It was creacted by Create-React-App
+# Frontend: It was created by Create-React-App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

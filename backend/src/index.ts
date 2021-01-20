@@ -14,7 +14,7 @@ app.use(cors())
 app.use(userRoutes)
 app.use('/admin', adminRoutes)
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 8000
 
 app.listen(port, () => {
     console.log(`App listening on PORT ${port}`)
