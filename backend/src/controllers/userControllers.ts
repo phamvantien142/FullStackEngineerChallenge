@@ -73,7 +73,7 @@ export const putFeedback = combineMiddlewares(
             reviewer: user._id
         }).exec()
         if (!feedback) return res.status(500).json({error: 'Feedback not found'})
-        if (feedback === FeedbackStatus.completed) return res.status(500).json({error: 'You already sent a feedback'})
+        if (feedback.status === FeedbackStatus.completed) return res.status(500).json({error: 'You already sent a feedback'})
         feedback.stars = parseInt(stars)
         feedback.comment = comment
         feedback.status = FeedbackStatus.completed
